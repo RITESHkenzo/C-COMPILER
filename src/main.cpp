@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-
+#include <fstream>
 #include "lexer.hpp"
 
 std::string tokenTypeToString(TokenType type) {
@@ -37,18 +37,61 @@ std::string tokenTypeToString(TokenType type) {
 
         case TokenType::UNKNOWN:
             return "UNKNOWN";
-    }
+        case TokenType::PLUS:
+            return "PLUS";
+
+        case TokenType::MINUS:
+            return "MINUS";
+
+        case TokenType::STAR:
+            return "STAR";
+
+        case TokenType::SLASH:
+            return "SLASH";
+        case TokenType::ASSIGN:
+            return "ASSIGN";
+
+        case TokenType::EQUAL_EQUAL:
+            return "EQUAL_EQUAL";
+
+        case TokenType::NOT_EQUAL:
+            return "NOT_EQUAL";
+
+        case TokenType::LESS:
+            return "LESS";
+
+        case TokenType::LESS_EQUAL:
+            return "LESS_EQUAL";
+
+        case TokenType::GREATER:
+            return "GREATER";
+
+        case TokenType::GREATER_EQUAL:
+            return "GREATER_EQUAL";
+        }
 
     return "UNKNOWN";
 }
 
-int main() {
+int main(int argc, char* argv[]) {
 
-    std::string source = R"(
-        int main() {
-            return 42;
-        }
-    )";
+    if (argc < 2) {
+    std::cerr << "Usage: ccompiler <file.c>\n";
+    return 1;
+}
+
+std::ifstream file(argv[1]);
+
+if (!file.is_open()) {
+    std::cerr << "Error: could not open file: "
+              << argv[1] << '\n';
+    return 1;
+}
+
+std::string source(
+    (std::istreambuf_iterator<char>(file)),
+    std::istreambuf_iterator<char>()
+);
 
     Lexer lexer(source);
 

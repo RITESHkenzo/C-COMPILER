@@ -18,7 +18,17 @@ enum class TokenType {
     LEFT_BRACE,
     RIGHT_BRACE,
     SEMICOLON,
-
+    PLUS,
+    MINUS,
+    STAR,
+    SLASH,
+    ASSIGN,
+    EQUAL_EQUAL,
+    NOT_EQUAL,
+    LESS,
+    LESS_EQUAL,
+    GREATER,
+    GREATER_EQUAL,
     // Special
     END_OF_FILE,
     UNKNOWN

@@ -76,6 +76,71 @@ switch (current) {
     case ';':
         position++;
         return {TokenType::SEMICOLON, ";"};
+    case '+':
+    position++;
+    return {TokenType::PLUS, "+"};
+
+    case '-':
+        position++;
+        return {TokenType::MINUS, "-"};
+
+    case '*':
+        position++;
+        return {TokenType::STAR, "*"};
+
+    case '/':
+        position++;
+        return {TokenType::SLASH, "/"};
+    case '=':
+    position++;
+
+    if (position < source.length() &&
+        source[position] == '=') {
+
+        position++;
+        return {TokenType::EQUAL_EQUAL, "=="};
+    }
+
+    return {TokenType::ASSIGN, "="};
+
+
+    case '!':
+        position++;
+
+        if (position < source.length() &&
+            source[position] == '=') {
+
+            position++;
+            return {TokenType::NOT_EQUAL, "!="};
+        }
+
+    return {TokenType::UNKNOWN, "!"};
+
+
+    case '<':
+        position++;
+
+        if (position < source.length() &&
+            source[position] == '=') {
+
+            position++;
+            return {TokenType::LESS_EQUAL, "<="};
+        }
+
+        return {TokenType::LESS, "<"};
+
+
+    case '>':
+        position++;
+
+        if (position < source.length() &&
+            source[position] == '=') {
+
+            position++;
+            return {TokenType::GREATER_EQUAL, ">="};
+        }
+
+        return {TokenType::GREATER, ">"};
 }
 position++;
 return {TokenType::UNKNOWN, std::string(1, current)};
